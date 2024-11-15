@@ -69,10 +69,31 @@ public class Executable {
     }
 
     private void jugadaHumano() {
-        // Implementación de jugada de humano
+        int fila, columna;
+        columna = 3;
+        fila = 3;
+
+        while (fila > 2 || columna > 2){
+            System.out.println("dijite la posicion de su movimiento: fila, columna por separado");
+            fila = reader.nextInt();
+            reader.nextLine();
+            columna = reader.nextInt();
+            reader.nextLine();
+            if (fila > 2 || columna > 2){
+                System.out.println("no se pueden numeros mayores a 2");
+            }
+        }
+
+        if (cont.jugadaHumano(fila, columna)){
+            System.out.println("Usted ha realizado su jugada.");
+            imprimirTablero();
+        } else{
+            System.out.println("nuh uh, ta ocupao o el juego ya está lleno");
+        }
+
     }
 
     private void validarGanador() {
-        // Implementación de la validación si alguien ya ganó el triqui
+        System.out.println(cont.quienGana());
     }
 }

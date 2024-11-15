@@ -5,7 +5,7 @@ import java.util.Random;
 public class Controladora {
 
     private String[][] tableroTresEnRaya;
-
+    private String[] raya;
     /**
      * Constructor de la clase Controladora para inicializar
      *
@@ -14,6 +14,7 @@ public class Controladora {
      */
     public Controladora() {
         tableroTresEnRaya = new String[3][3];
+        raya = new String[3];
         inicializarTablero();
     }
 
@@ -55,5 +56,74 @@ public class Controladora {
             j = rand.nextInt(3);
         } while (!tableroTresEnRaya[i][j].equals(" "));
         tableroTresEnRaya[i][j] = "X";
+    }
+
+    public boolean jugadaHumano(int i, int j){
+        if (tableroTresEnRaya[i][j].equals(" ")){
+            tableroTresEnRaya[i][j] = "O";
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
+    public String quienGana(){
+        int d = 0;
+        String mensajeBot = "te gana la pc jaja";
+        String mensajeHumano = "gana el jugador (tu)";
+        String mensajeNadie = "nadie gana :(";
+
+        //chequeamos las 3 filas
+        for (int i = 0; i<3; i++){
+            for (int j = 0; j<3; j++){
+                raya[j] = tableroTresEnRaya[i][j];
+            }
+            if (raya[0].equals("X") && raya[1].equals("X") && raya[2].equals("X")){
+                return mensajeBot;
+            }
+            if (raya[0].equals("O") && raya[1].equals("O") && raya[2].equals("O")){
+                return mensajeHumano;
+            }
+        }
+
+        //chequeamos las 3 columnas
+        for (int i = 0; i<3; i++){
+            for (int j = 0; j<3; j++){
+                raya[j] = tableroTresEnRaya[j][i];
+            }
+            if (raya[0].equals("X") && raya[1].equals("X") && raya[2].equals("X")){
+                return mensajeBot;
+            }
+            if (raya[0].equals("O") && raya[1].equals("O") && raya[2].equals("O")){
+                return mensajeHumano;
+            }
+        }
+
+        //chequeamos las 2 diagonales
+        for (int j = 0; j<3; j++){
+            raya[j] = tableroTresEnRaya[j][j];
+        }
+        if (raya[0].equals("X") && raya[1].equals("X") && raya[2].equals("X")){
+            return mensajeBot;
+        }
+        if (raya[0].equals("O") && raya[1].equals("O") && raya[2].equals("O")){
+            return mensajeHumano;
+        }
+
+        for (int i = 2; i>(-1); i--){
+            d = d+1;
+            raya[i] = tableroTresEnRaya[i][i];
+
+        }
+        if (raya[0].equals("X") && raya[1].equals("X") && raya[2].equals("X")){
+            return mensajeBot;
+        }
+        if (raya[0].equals("O") && raya[1].equals("O") && raya[2].equals("O")){
+            return mensajeHumano;
+        }
+
+
+        return mensajeNadie;
     }
 }
